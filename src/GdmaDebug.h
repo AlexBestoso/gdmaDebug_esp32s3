@@ -155,10 +155,78 @@ class GdmaDebug{
 		void initPermissionStatRegs(void);
 		void init_extmem_reject_addr(void);
 		void init_extmem_reject_st(void);
+		
+		// Version Register
+		void init_date(void);
+
+		/*
+		 * Print Functions 
+		 * */
+		void print(bool onlyCoreValues);
+
+		// Configuration Registers
+		void printConfigRegs(bool onlyCoreValues);
+       		void print_in_conf0(bool onlyCoreValues);
+		void print_in_conf1(bool onlyCoreValues); 
+		void print_in_pop(bool onlyCoreValues);
+		void print_in_link(bool onlyCoreValues);
+		void print_out_conf0(bool onlyCoreValues);
+		void print_out_conf1(bool onlyCoreValues);
+		void print_out_push(bool onlyCoreValues);
+		void print_out_link(bool onlyCoreValues);
+		void print_pd_conf(bool onlyCoreValues);
+		void print_misc_conf(bool onlyCoreValues);
+
+		
+		// Interrupt Registers
+		void printInterruptRegs(bool onlyCoreValues);
+		void print_in_int_raw(bool onlyCoreValues);
+		void print_in_int_st(bool onlyCoreValues);
+		void print_in_int_ena(bool onlyCoreValues);
+		void print_in_int_clr(bool onlyCoreValues);
+		void print_out_int_raw(bool onlyCoreValues);
+		void print_out_int_st(bool onlyCoreValues);
+		void print_out_int_ena(bool onlyCoreValues);
+		void print_out_int_clr(bool onlyCoreValues);
+		void print_extmem_reject_int(bool onlyCoreValues);
+		void print_extmem_reject_int_st(bool onlyCoreValues);
+		void print_extmem_reject_int_ena(bool onlyCoreValues);
+		void print_extmem_reject_int_clr(bool onlyCoreValues);
+
+		// Status Registers
+		void printStatusRegs(bool onlyCoreValues);
+		void print_infifo_status(bool onlyCoreValues);
+		void print_in_state(bool onlyCoreValues);
+		void print_in_suc_eof_des_addr(bool onlyCoreValues);
+		void print_in_err_eof_des_addr(bool onlyCoreValues);
+		void print_in_dscr(bool onlyCoreValues);
+		void print_in_dscr_bf0(bool onlyCoreValues);
+		void print_in_dscr_bf1(bool onlyCoreValues);
+		void print_outfifo_status(bool onlyCoreValues);
+		void print_out_state(bool onlyCoreValues);
+		void print_out_eof_des_addr(bool onlyCoreValues);
+		void print_out_eof_bfr_des_addr(bool onlyCoreValues);
+		void print_out_dscr(bool onlyCoreValues);
+		void print_out_dscr_bf0(bool onlyCoreValues);
+		void print_out_dscr_bf1(bool onlyCoreValues);
+
+		// Priority Registers
+		void printPriorityRegs(bool onlyCoreValues);
+		void print_in_pri(bool onlyCoreValues);
+		void print_out_pri(bool onlyCoreValues);
+
+		// Peripheral Selection Registers
+		void printPeriphSelRegs(bool onlyCoreValues);
+		void print_in_peri_sel(bool onlyCoreValues);
+		void print_out_peri_sel(bool onlyCoreValues);
+
+		// Permission Status Registers
+		void printPermissionStatRegs(bool onlyCoreValues);
+		void print_extmem_reject_addr(bool onlyCoreValues);
+		void print_extmem_reject_st(bool onlyCoreValues);
 		/*
 		 * Version Register
 		 * */
-		void init_date(void);
-
+		void print_date(bool onlyCoreValues);
 
 };

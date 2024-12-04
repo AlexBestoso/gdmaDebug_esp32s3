@@ -4,11 +4,15 @@
 
 GdmaDebug gdbg;
 void setup() {
-  // put your setup code here, to run once:
+  Serial.begin(115200);
+  Serial.printf("Running the thing....\n");
+  delay(2000);
+  gdbg.channel = 0;
   gdbg.init();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  gdbg.print(false);
+  gdbg.refresh();
+  delay(6000);
 }

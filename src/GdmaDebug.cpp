@@ -894,3 +894,560 @@ void GdmaDebug::init_date(void){
 		this->date.gdma_date_y
 	);
 }
+
+/*
+ * Debug print functions
+ * */
+void GdmaDebug::print(bool onlyCoreValues){
+	this->printConfigRegs(onlyCoreValues);
+	this->printInterruptRegs(onlyCoreValues);
+	this->printStatusRegs(onlyCoreValues);
+	this->printPriorityRegs(onlyCoreValues);
+	this->printPeriphSelRegs(onlyCoreValues);
+	this->printPermissionStatRegs(onlyCoreValues);
+	this->print_date(onlyCoreValues);
+}
+
+// Configuration Registers
+void GdmaDebug::printConfigRegs(bool onlyCoreValues){
+	this->print_in_conf0(onlyCoreValues);
+	this->print_in_conf1(onlyCoreValues); 
+	this->print_in_pop(onlyCoreValues);
+	this->print_in_link(onlyCoreValues);
+	this->print_out_conf0(onlyCoreValues);
+	this->print_out_conf1(onlyCoreValues);
+	this->print_out_push(onlyCoreValues);
+	this->print_out_link(onlyCoreValues);
+	this->print_pd_conf(onlyCoreValues);
+	this->print_misc_conf(onlyCoreValues);
+}
+
+void GdmaDebug::print_in_conf0(bool onlyCoreValues){
+	Serial.printf("=== in_conf0 values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_conf0.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_conf0.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_conf0.offset);
+		Serial.printf("\tgdma_mem_trans_en_ch : 0x%x\n", this->in_conf0.gdma_mem_trans_en_ch);
+		Serial.printf("\tgdma_in_data_burst_en_ch : 0x%x\n", this->in_conf0.gdma_in_data_burst_en_ch);
+		Serial.printf("\tgdma_indscr_burst_en_ch : 0x%x\n", this->in_conf0.gdma_indscr_burst_en_ch);
+		Serial.printf("\tgdma_in_loop_test_ch : 0x%x\n", this->in_conf0.gdma_in_loop_test_ch);
+		Serial.printf("\tgdma_in_rst_ch : 0x%x\n", this->in_conf0.gdma_in_rst_ch);
+	}
+}
+void GdmaDebug::print_in_conf1(bool onlyCoreValues){
+	Serial.printf("=== in_conf1 values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_conf1.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_conf1.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_conf1.offset);
+		Serial.printf("\tgdma_in_ext_mem_bk_size_ch : 0x%x\n", this->in_conf1.gdma_in_ext_mem_bk_size_ch);
+		Serial.printf("\tgdma_in_check_owner_ch : 0x%x\n", this->in_conf1.gdma_in_check_owner_ch);
+		Serial.printf("\tgdma_dma_infifo_full_thrs_ch : 0x%x\n", this->in_conf1.gdma_dma_infifo_full_thrs_ch);
+	}
+}
+void GdmaDebug::print_in_pop(bool onlyCoreValues){
+	Serial.printf("=== in_pop values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_pop.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_pop.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_pop.offset);
+		Serial.printf("\tgdma_infifo_pop_ch : 0x%x\n", this->in_pop.gdma_infifo_pop_ch);
+	}
+}
+void GdmaDebug::print_in_link(bool onlyCoreValues){
+	Serial.printf("=== in_link values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_link.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_link.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_link.offset);
+		Serial.printf("\tgdma_inlink_park_ch : 0x%x\n", this->in_link.gdma_inlink_park_ch);
+		Serial.printf("\tgdma_inlink_restart_ch : 0x%x\n", this->in_link.gdma_inlink_restart_ch);
+		Serial.printf("\tgdma_inlink_start_ch : 0x%x\n", this->in_link.gdma_inlink_start_ch);
+		Serial.printf("\tgdma_inlink_stop_ch : 0x%x\n", this->in_link.gdma_inlink_stop_ch);
+		Serial.printf("\tgdma_inlink_auto_ret_ch : 0x%x\n", this->in_link.gdma_inlink_auto_ret_ch);
+		Serial.printf("\tgdma_inlink_addr_ch : 0x%x\n", this->in_link.gdma_inlink_addr_ch);
+	}
+}
+void GdmaDebug::print_out_conf0(bool onlyCoreValues){
+	Serial.printf("=== out_conf0 values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_conf0.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_conf0.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_conf0.offset);
+		Serial.printf("\tgdma_out_data_burst_en_ch : 0x%x\n", this->out_conf0.gdma_out_data_burst_en_ch);
+		Serial.printf("\tgdma_outdscr_burst_en_ch : 0x%x\n", this->out_conf0.gdma_outdscr_burst_en_ch);
+		Serial.printf("\tgdma_out_eof_mode_ch : 0x%x\n", this->out_conf0.gdma_out_eof_mode_ch);
+		Serial.printf("\tgdma_out_auto_wrback_ch : 0x%x\n", this->out_conf0.gdma_out_auto_wrback_ch);
+		Serial.printf("\tgdma_out_loop_test_ch : 0x%x\n", this->out_conf0.gdma_out_loop_test_ch);
+		Serial.printf("\tgdma_out_rst_ch : 0x%x\n", this->out_conf0.gdma_out_rst_ch);
+	}
+}
+void GdmaDebug::print_out_conf1(bool onlyCoreValues){
+	Serial.printf("=== out_conf1 values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_conf1.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_conf1.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_conf1.offset);
+		Serial.printf("\tgdma_out_ext_mem_bk_size_ch : 0x%x\n", this->out_conf1.gdma_out_ext_mem_bk_size_ch);
+		Serial.printf("\tgdma_out_check_owner_ch : 0x%x\n", this->out_conf1.gdma_out_check_owner_ch);
+	}
+}
+void GdmaDebug::print_out_push(bool onlyCoreValues){
+	Serial.printf("=== out_push values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_push.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_push.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_push.offset);
+		Serial.printf("\tgdma_outfifo_push_ch : 0x%x\n", this->out_push.gdma_outfifo_push_ch);
+		Serial.printf("\tgdma_outfifo_wdata_ch : 0x%x\n", this->out_push.gdma_outfifo_wdata_ch);
+	}
+}
+void GdmaDebug::print_out_link(bool onlyCoreValues){
+	Serial.printf("=== out_link values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_link.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_link.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_link.offset);
+		Serial.printf("\tgdma_outlink_park_ch : 0x%x\n", this->out_link.gdma_outlink_park_ch);
+		Serial.printf("\tgdma_outlink_restart_ch : 0x%x\n", this->out_link.gdma_outlink_restart_ch);
+		Serial.printf("\tgdma_outlink_start_ch : 0x%x\n", this->out_link.gdma_outlink_start_ch);
+		Serial.printf("\tgdma_outlink_stop_ch : 0x%x\n", this->out_link.gdma_outlink_stop_ch);
+		Serial.printf("\tgdma_outlink_addr_ch : 0x%x\n", this->out_link.gdma_outlink_addr_ch);
+	}
+}
+void GdmaDebug::print_pd_conf(bool onlyCoreValues){
+	Serial.printf("=== pd_conf values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->pd_conf.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->pd_conf.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->pd_conf.offset);
+		Serial.printf("\tgdma_dma_ram_clk_fo : 0x%x\n", this->pd_conf.gdma_dma_ram_clk_fo);
+		Serial.printf("\tgdma_dma_ram_force_pu : 0x%x\n", this->pd_conf.gdma_dma_ram_force_pu);
+		Serial.printf("\tgdma_dma_ram_force_pd : 0x%x\n", this->pd_conf.gdma_dma_ram_force_pd);
+	}
+}
+void GdmaDebug::print_misc_conf(bool onlyCoreValues){
+	Serial.printf("=== misc_conf values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->misc_conf.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->misc_conf.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->misc_conf.offset);
+		Serial.printf("\tgdma_clk_en : 0x%x\n", this->misc_conf.gdma_clk_en);
+		Serial.printf("\tgdma_arb_pri_dis : 0x%x\n", this->misc_conf.gdma_arb_pri_dis);
+		Serial.printf("\tgdma_ahbm_rst_exter : 0x%x\n", this->misc_conf.gdma_ahbm_rst_exter);
+		Serial.printf("\tgdma_ahbm_rst_inter : 0x%x\n", this->misc_conf.gdma_ahbm_rst_inter);
+	}
+}
+
+// Interrupt Registers
+void GdmaDebug::printInterruptRegs(bool onlyCoreValues){
+	this->print_in_int_raw(onlyCoreValues);
+	this->print_in_int_st(onlyCoreValues);
+	this->print_in_int_ena(onlyCoreValues);
+	this->print_in_int_clr(onlyCoreValues);
+	this->print_out_int_raw(onlyCoreValues);
+	this->print_out_int_st(onlyCoreValues);
+	this->print_out_int_ena(onlyCoreValues);
+	this->print_out_int_clr(onlyCoreValues);
+	this->print_extmem_reject_int(onlyCoreValues);
+	this->print_extmem_reject_int_st(onlyCoreValues);
+	this->print_extmem_reject_int_ena(onlyCoreValues);
+	this->print_extmem_reject_int_clr(onlyCoreValues);
+}
+
+void GdmaDebug::print_in_int_raw(bool onlyCoreValues){
+	Serial.printf("=== in_int_raw values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_int_raw.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_int_raw.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_int_raw.offset);
+		Serial.printf("\tgdma_infifo_full_wm_ch0_int_raw : 0x%x\n", this->in_int_raw.gdma_infifo_full_wm_ch0_int_raw);
+		Serial.printf("\tgdma_in_dscr_empty_ch0_int_raw : 0x%x\n", this->in_int_raw.gdma_in_dscr_empty_ch0_int_raw);
+		Serial.printf("\tgdma_in_dscr_err_ch0_int_raw : 0x%x\n", this->in_int_raw.gdma_in_dscr_err_ch0_int_raw);
+		Serial.printf("\tgdma_in_err_eof_ch0_int_raw : 0x%x\n", this->in_int_raw.gdma_in_err_eof_ch0_int_raw);
+		Serial.printf("\tgdma_in_suc_eof_ch0_int_raw : 0x%x\n", this->in_int_raw.gdma_in_suc_eof_ch0_int_raw);
+		Serial.printf("\tgdma_in_done_ch0_int_raw : 0x%x\n", this->in_int_raw.gdma_in_done_ch0_int_raw);
+	}
+}
+void GdmaDebug::print_in_int_st(bool onlyCoreValues){
+	Serial.printf("=== in_int_st values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_int_st.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_int_st.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_int_st.offset);
+		Serial.printf("\tgdma_infifo_full_wm_ch0_int_st : 0x%x\n", this->in_int_st.gdma_infifo_full_wm_ch0_int_st);
+		Serial.printf("\tgdma_in_dscr_empty_ch0_int_st : 0x%x\n", this->in_int_st.gdma_in_dscr_empty_ch0_int_st);
+		Serial.printf("\tgdma_in_dscr_err_ch0_int_st : 0x%x\n", this->in_int_st.gdma_in_dscr_err_ch0_int_st);
+		Serial.printf("\tgdma_in_err_eof_ch0_int_st : 0x%x\n", this->in_int_st.gdma_in_err_eof_ch0_int_st);
+		Serial.printf("\tgdma_in_suc_eof_ch0_int_st : 0x%x\n", this->in_int_st.gdma_in_suc_eof_ch0_int_st);
+		Serial.printf("\tgdma_in_done_ch0_int_st : 0x%x\n", this->in_int_st.gdma_in_done_ch0_int_st);
+	}
+}
+void GdmaDebug::print_in_int_ena(bool onlyCoreValues){
+	Serial.printf("=== in_int_ena values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_int_ena.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_int_ena.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_int_ena.offset);
+		Serial.printf("\tgdma_infifo_full_wm_ch0_int_ena : 0x%x\n", this->in_int_ena.gdma_infifo_full_wm_ch0_int_ena);
+		Serial.printf("\tgdma_in_dscr_empty_ch0_int_ena : 0x%x\n", this->in_int_ena.gdma_in_dscr_empty_ch0_int_ena);
+		Serial.printf("\tgdma_in_dscr_err_ch0_int_ena : 0x%x\n", this->in_int_ena.gdma_in_dscr_err_ch0_int_ena);
+		Serial.printf("\tgdma_in_err_eof_ch0_int_ena : 0x%x\n", this->in_int_ena.gdma_in_err_eof_ch0_int_ena);
+		Serial.printf("\tgdma_in_suc_eof_ch0_int_ena : 0x%x\n", this->in_int_ena.gdma_in_suc_eof_ch0_int_ena);
+		Serial.printf("\tgdma_in_done_ch0_int_ena : 0x%x\n", this->in_int_ena.gdma_in_done_ch0_int_ena);
+	}
+}
+void GdmaDebug::print_in_int_clr(bool onlyCoreValues){
+	Serial.printf("=== in_int_clr values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_int_clr.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_int_clr.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_int_clr.offset);
+		Serial.printf("\tgdma_dma_infifo_full_wm_ch0_int_clr : 0x%x\n", this->in_int_clr.gdma_dma_infifo_full_wm_ch0_int_clr);
+		Serial.printf("\tgdma_in_dscr_empty_ch0_int_clr : 0x%x\n", this->in_int_clr.gdma_in_dscr_empty_ch0_int_clr);
+		Serial.printf("\tgdma_in_dscr_err_ch0_int_clr : 0x%x\n", this->in_int_clr.gdma_in_dscr_err_ch0_int_clr);
+		Serial.printf("\tgdma_in_err_eof_ch0_int_clr : 0x%x\n", this->in_int_clr.gdma_in_err_eof_ch0_int_clr);
+		Serial.printf("\tgdma_in_suc_eof_ch0_int_clr : 0x%x\n", this->in_int_clr.gdma_in_suc_eof_ch0_int_clr);
+		Serial.printf("\tgdma_in_done_ch0_int_clr : 0x%x\n", this->in_int_clr.gdma_in_done_ch0_int_clr);
+	}
+}
+void GdmaDebug::print_out_int_raw(bool onlyCoreValues){
+	Serial.printf("=== out_int_raw values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_int_raw.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_int_raw.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_int_raw.offset);
+		Serial.printf("\tgdma_out_total_eof_ch0_int_raw : 0x%x\n", this->out_int_raw.gdma_out_total_eof_ch0_int_raw);
+		Serial.printf("\tgdma_out_dscr_err_ch0_int_raw : 0x%x\n", this->out_int_raw.gdma_out_dscr_err_ch0_int_raw);
+		Serial.printf("\tgdma_out_eof_ch0_int_raw : 0x%x\n", this->out_int_raw.gdma_out_eof_ch0_int_raw);
+		Serial.printf("\tgdma_out_done_ch0_int_raw : 0x%x\n", this->out_int_raw.gdma_out_done_ch0_int_raw);
+	}
+}
+void GdmaDebug::print_out_int_st(bool onlyCoreValues){
+	Serial.printf("=== out_int_st values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_int_st.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_int_st.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_int_st.offset);
+		Serial.printf("\tgdma_out_total_eof_ch0_int_st : 0x%x\n", this->out_int_st.gdma_out_total_eof_ch0_int_st);
+		Serial.printf("\tgdma_out_dscr_err_ch0_int_st : 0x%x\n", this->out_int_st.gdma_out_dscr_err_ch0_int_st);
+		Serial.printf("\tgdma_out_eof_ch0_int_st : 0x%x\n", this->out_int_st.gdma_out_eof_ch0_int_st);
+		Serial.printf("\tgdma_out_done_ch0_int_st : 0x%x\n", this->out_int_st.gdma_out_done_ch0_int_st);
+	}
+}
+void GdmaDebug::print_out_int_ena(bool onlyCoreValues){
+	Serial.printf("=== out_int_ena values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_int_ena.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_int_ena.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_int_ena.offset);
+		Serial.printf("\tgdma_out_total_eof_ch0_int_ena : 0x%x\n", this->out_int_ena.gdma_out_total_eof_ch0_int_ena);
+		Serial.printf("\tgdma_out_dscr_err_ch0_int_ena : 0x%x\n", this->out_int_ena.gdma_out_dscr_err_ch0_int_ena);
+		Serial.printf("\tgdma_out_eof_ch0_int_ena : 0x%x\n", this->out_int_ena.gdma_out_eof_ch0_int_ena);
+		Serial.printf("\tgdma_out_done_ch0_int_ena : 0x%x\n", this->out_int_ena.gdma_out_done_ch0_int_ena);
+	}
+}
+void GdmaDebug::print_out_int_clr(bool onlyCoreValues){
+	Serial.printf("=== out_int_clr values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_int_clr.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_int_clr.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_int_clr.offset);
+		Serial.printf("\tgdma_out_total_eof_ch0_int_clr : 0x%x\n", this->out_int_clr.gdma_out_total_eof_ch0_int_clr);
+		Serial.printf("\tgdma_out_dscr_err_ch0_int_clr : 0x%x\n", this->out_int_clr.gdma_out_dscr_err_ch0_int_clr);
+		Serial.printf("\tgdma_out_eof_ch0_int_clr : 0x%x\n", this->out_int_clr.gdma_out_eof_ch0_int_clr);
+		Serial.printf("\tgdma_out_done_ch0_int_clr : 0x%x\n", this->out_int_clr.gdma_out_done_ch0_int_clr);
+	}
+}
+void GdmaDebug::print_extmem_reject_int(bool onlyCoreValues){
+	Serial.printf("=== extmem_reject_int values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->extmem_reject_int.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->extmem_reject_int.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->extmem_reject_int.offset);
+		Serial.printf("\tgdma_extmem_reject_int_raw : 0x%x\n", this->extmem_reject_int.gdma_extmem_reject_int_raw);
+	}
+}
+void GdmaDebug::print_extmem_reject_int_st(bool onlyCoreValues){
+	Serial.printf("=== extmem_reject_int_st values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->extmem_reject_int_st.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->extmem_reject_int_st.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->extmem_reject_int_st.offset);
+		Serial.printf("\tgdma_extmem_reject_int_st : 0x%x\n", this->extmem_reject_int_st.gdma_extmem_reject_int_st);
+	}
+}
+void GdmaDebug::print_extmem_reject_int_ena(bool onlyCoreValues){
+	Serial.printf("=== extmem_reject_int_ena values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->extmem_reject_int_ena.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->extmem_reject_int_ena.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->extmem_reject_int_ena.offset);
+		Serial.printf("\tgdma_extmem_reject_int_ena : 0x%x\n", this->extmem_reject_int_ena.gdma_extmem_reject_int_ena);
+	}
+}
+void GdmaDebug::print_extmem_reject_int_clr(bool onlyCoreValues){
+	Serial.printf("=== extmem_reject_int_clr values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->extmem_reject_int_clr.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->extmem_reject_int_clr.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->extmem_reject_int_clr.offset);
+		Serial.printf("\tgdma_extmem_reject_int_clr : 0x%x\n", this->extmem_reject_int_clr.gdma_extmem_reject_int_clr);
+	}
+}
+
+
+// Status Registers
+void GdmaDebug::printStatusRegs(bool onlyCoreValues){
+	this->print_infifo_status(onlyCoreValues);
+	this->print_in_state(onlyCoreValues);
+	this->print_in_suc_eof_des_addr(onlyCoreValues);
+	this->print_in_err_eof_des_addr(onlyCoreValues);
+	this->print_in_dscr(onlyCoreValues);
+	this->print_in_dscr_bf0(onlyCoreValues);
+	this->print_in_dscr_bf1(onlyCoreValues);
+	this->print_outfifo_status(onlyCoreValues);
+	this->print_out_state(onlyCoreValues);
+	this->print_out_eof_des_addr(onlyCoreValues);
+	this->print_out_eof_bfr_des_addr(onlyCoreValues);
+	this->print_out_dscr(onlyCoreValues);
+	this->print_out_dscr_bf0(onlyCoreValues);
+	this->print_out_dscr_bf1(onlyCoreValues);
+}
+
+void GdmaDebug::print_infifo_status(bool onlyCoreValues){
+	Serial.printf("=== infifo_status values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->infifo_status.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->infifo_status.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->infifo_status.offset);
+		Serial.printf("\tgdma_infifo_cnt_l3_ch0 : 0x%x\n", this->infifo_status.gdma_infifo_cnt_l3_ch0);
+		Serial.printf("\tgdma_infifo_cnt_l2_ch0 : 0x%x\n", this->infifo_status.gdma_infifo_cnt_l2_ch0);
+		Serial.printf("\tgdma_infifo_cnt_l1_ch0 : 0x%x\n", this->infifo_status.gdma_infifo_cnt_l1_ch0);
+		Serial.printf("\tgdma_infifo_empty_l3_ch0 : 0x%x\n", this->infifo_status.gdma_infifo_empty_l3_ch0);
+		Serial.printf("\tgdma_infifo_full_l3_ch0 : 0x%x\n", this->infifo_status.gdma_infifo_full_l3_ch0);
+		Serial.printf("\tgdma_infifo_empty_l2_ch0 : 0x%x\n", this->infifo_status.gdma_infifo_empty_l2_ch0);
+		Serial.printf("\tgdma_infifo_full_l2_ch0 : 0x%x\n", this->infifo_status.gdma_infifo_full_l2_ch0);
+		Serial.printf("\tgdma_infifo_empty_l1_ch0 : 0x%x\n", this->infifo_status.gdma_infifo_empty_l1_ch0);
+		Serial.printf("\tgdma_infifo_full_l1_ch0 : 0x%x\n", this->infifo_status.gdma_infifo_full_l1_ch0);
+	}
+}
+void GdmaDebug::print_in_state(bool onlyCoreValues){
+	Serial.printf("=== in_state values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_state.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_state.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_state.offset);
+		Serial.printf("\tgdma_inlink_dscr_addr_ch0 : 0x%x\n", this->in_state.gdma_inlink_dscr_addr_ch0);
+	}
+}
+void GdmaDebug::print_in_suc_eof_des_addr(bool onlyCoreValues){
+	Serial.printf("=== in_suc_eof_des_addr values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_suc_eof_des_addr.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_suc_eof_des_addr.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_suc_eof_des_addr.offset);
+		Serial.printf("\tgdma_in_suc_eof_des_addr_ch0 : 0x%x\n", this->in_suc_eof_des_addr.gdma_in_suc_eof_des_addr_ch0);
+	}
+}
+void GdmaDebug::print_in_err_eof_des_addr(bool onlyCoreValues){
+	Serial.printf("=== in_err_eof_des_addr values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_err_eof_des_addr.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_err_eof_des_addr.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_err_eof_des_addr.offset);
+		Serial.printf("\tgdma_in_err_eof_des_addr_ch0 : 0x%x\n", this->in_err_eof_des_addr.gdma_in_err_eof_des_addr_ch0);
+	}
+}
+void GdmaDebug::print_in_dscr(bool onlyCoreValues){
+	Serial.printf("=== in_dscr values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_dscr.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_dscr.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_dscr.offset);
+		Serial.printf("\tgdma_inlink_dscr_ch0 : 0x%x\n", this->in_dscr.gdma_inlink_dscr_ch0);
+	}
+}
+void GdmaDebug::print_in_dscr_bf0(bool onlyCoreValues){
+	Serial.printf("=== in_dscr_bf0 values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_dscr_bf0.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_dscr_bf0.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_dscr_bf0.offset);
+		Serial.printf("\tgdma_inlink_dscr_bf0_ch0 : 0x%x\n", this->in_dscr_bf0.gdma_inlink_dscr_bf0_ch0);
+	}
+}
+void GdmaDebug::print_in_dscr_bf1(bool onlyCoreValues){
+	Serial.printf("=== in_dscr_bf1 values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_dscr_bf1.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_dscr_bf1.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_dscr_bf1.offset);
+		Serial.printf("\tgdma_inlink_dscr_bf1_ch0 : 0x%x\n", this->in_dscr_bf1.gdma_inlink_dscr_bf1_ch0);
+	}
+}
+void GdmaDebug::print_outfifo_status(bool onlyCoreValues){
+	Serial.printf("=== outfifo_status values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->outfifo_status.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->outfifo_status.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->outfifo_status.offset);
+		Serial.printf("\tgdma_out_remain_under_4b_l3_ch0 : 0x%x\n", this->outfifo_status.gdma_out_remain_under_4b_l3_ch0);
+		Serial.printf("\tgdma_out_remain_under_3b_l3_ch0 : 0x%x\n", this->outfifo_status.gdma_out_remain_under_3b_l3_ch0);
+		Serial.printf("\tgdma_out_remain_under_2b_l3_ch0 : 0x%x\n", this->outfifo_status.gdma_out_remain_under_2b_l3_ch0);
+		Serial.printf("\tgdma_out_remain_under_1b_l3_ch0 : 0x%x\n", this->outfifo_status.gdma_out_remain_under_1b_l3_ch0);
+		Serial.printf("\tgdma_outfifo_cnt_l3_ch0 : 0x%x\n", this->outfifo_status.gdma_outfifo_cnt_l3_ch0);
+		Serial.printf("\tgdma_outfifo_cnt_l2_ch0 : 0x%x\n", this->outfifo_status.gdma_outfifo_cnt_l2_ch0);
+		Serial.printf("\tgdma_outfifo_cnt_l1_ch0 : 0x%x\n", this->outfifo_status.gdma_outfifo_cnt_l1_ch0);
+		Serial.printf("\tgdma_outfifo_empty_l3_ch0 : 0x%x\n", this->outfifo_status.gdma_outfifo_empty_l3_ch0);
+		Serial.printf("\tgdma_outfifo_full_l3_ch0 : 0x%x\n", this->outfifo_status.gdma_outfifo_full_l3_ch0);
+		Serial.printf("\tgdma_outfifo_empty_l2_ch0 : 0x%x\n", this->outfifo_status.gdma_outfifo_empty_l2_ch0);
+		Serial.printf("\tgdma_outfifo_full_l2_ch0 : 0x%x\n", this->outfifo_status.gdma_outfifo_full_l2_ch0);
+		Serial.printf("\tgdma_outfifo_empty_l1_ch0 : 0x%x\n", this->outfifo_status.gdma_outfifo_empty_l1_ch0);
+		Serial.printf("\tgdma_outfifo_full_l1_ch0 : 0x%x\n", this->outfifo_status.gdma_outfifo_full_l1_ch0);
+	}
+}
+void GdmaDebug::print_out_state(bool onlyCoreValues){
+	Serial.printf("=== out_state values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_state.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_state.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_state.offset);
+		Serial.printf("\tgdma_out_state_ch0 : 0x%x\n", this->out_state.gdma_out_state_ch0);
+		Serial.printf("\tgdma_out_dscr_state_ch0 : 0x%x\n", this->out_state.gdma_out_dscr_state_ch0);
+		Serial.printf("\tgdma_outlink_dscr_addr_ch0 : 0x%x\n", this->out_state.gdma_outlink_dscr_addr_ch0);
+	}
+}
+void GdmaDebug::print_out_eof_des_addr(bool onlyCoreValues){
+	Serial.printf("=== out_eof_des_addr values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_eof_des_addr.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_eof_des_addr.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_eof_des_addr.offset);
+		Serial.printf("\tgdma_out_eof_des_addr_ch0 : 0x%x\n", this->out_eof_des_addr.gdma_out_eof_des_addr_ch0);
+	}
+}
+void GdmaDebug::print_out_eof_bfr_des_addr(bool onlyCoreValues){
+	Serial.printf("=== out_eof_bfr_des_addr values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_eof_bfr_des_addr.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_eof_bfr_des_addr.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_eof_bfr_des_addr.offset);
+		Serial.printf("\tgdma_out_eof_bfr_des_addr_ch0 : 0x%x\n", this->out_eof_bfr_des_addr.gdma_out_eof_bfr_des_addr_ch0);
+	}
+}
+void GdmaDebug::print_out_dscr(bool onlyCoreValues){
+	Serial.printf("=== out_dscr values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_dscr.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_dscr.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_dscr.offset);
+		Serial.printf("\tgdma_outlink_dscr_ch0 : 0x%x\n", this->out_dscr.gdma_outlink_dscr_ch0);
+	}
+}
+void GdmaDebug::print_out_dscr_bf0(bool onlyCoreValues){
+	Serial.printf("=== out_dscr_bf0 values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_dscr_bf0.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_dscr_bf0.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_dscr_bf0.offset);
+		Serial.printf("\tgdma_outlink_dscr_bf0_ch0 : 0x%x\n", this->out_dscr_bf0.gdma_outlink_dscr_bf0_ch0);
+	}
+}
+void GdmaDebug::print_out_dscr_bf1(bool onlyCoreValues){
+	Serial.printf("=== out_dscr_bf1 values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_dscr_bf1.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_dscr_bf1.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_dscr_bf1.offset);
+		Serial.printf("\tgdma_outlink_dscr_bf1_ch0 : 0x%x\n", this->out_dscr_bf1.gdma_outlink_dscr_bf1_ch0);
+	}
+}
+
+// Priority Registers
+void GdmaDebug::printPriorityRegs(bool onlyCoreValues){
+	this->print_in_pri(onlyCoreValues);
+	this->print_out_pri(onlyCoreValues);
+}
+void GdmaDebug::print_in_pri(bool onlyCoreValues){
+	Serial.printf("=== in_pri values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_pri.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_pri.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_pri.offset);
+		Serial.printf("\tgdma_rx_pri_ch0 : 0x%x\n", this->in_pri.gdma_rx_pri_ch0);
+	}
+}
+void GdmaDebug::print_out_pri(bool onlyCoreValues){
+	Serial.printf("=== out_pri values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_pri.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_pri.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_pri.offset);
+		Serial.printf("\tgdma_tx_pri_ch0 : 0x%x\n", this->out_pri.gdma_tx_pri_ch0);
+	}
+}
+
+// Peripheral Selection Registers
+void GdmaDebug::printPeriphSelRegs(bool onlyCoreValues){
+	this->print_in_peri_sel(onlyCoreValues);
+	this->print_out_peri_sel(onlyCoreValues);
+}
+void GdmaDebug::print_in_peri_sel(bool onlyCoreValues){
+	Serial.printf("=== in_peri_sel values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->in_peri_sel.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->in_peri_sel.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->in_peri_sel.offset);
+		Serial.printf("\tgdma_peri_in_sel_ch0 : 0x%x\n", this->in_peri_sel.gdma_peri_in_sel_ch0);
+	}
+}
+void GdmaDebug::print_out_peri_sel(bool onlyCoreValues){
+	Serial.printf("=== out_peri_sel values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->out_peri_sel.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->out_peri_sel.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->out_peri_sel.offset);
+		Serial.printf("\tgdma_peri_out_sel_ch0 : 0x%x\n", this->out_peri_sel.gdma_peri_out_sel_ch0);
+	}
+}
+
+// Permission Status Registers
+void GdmaDebug::printPermissionStatRegs(bool onlyCoreValues){
+	this->print_extmem_reject_addr(onlyCoreValues);
+	this->print_extmem_reject_st(onlyCoreValues);
+}
+
+void GdmaDebug::print_extmem_reject_addr(bool onlyCoreValues){
+	Serial.printf("=== extmem_reject_addr values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->extmem_reject_addr.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->extmem_reject_addr.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->extmem_reject_addr.offset);
+		Serial.printf("\tgdma_extmem_reject_addr : 0x%x\n", this->extmem_reject_addr.gdma_extmem_reject_addr);
+	}
+}
+void GdmaDebug::print_extmem_reject_st(bool onlyCoreValues){
+	Serial.printf("=== extmem_reject_st values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->extmem_reject_st.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->extmem_reject_st.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->extmem_reject_st.offset);
+		Serial.printf("\tgdma_extmem_reject_peri_num : 0x%x\n", this->extmem_reject_st.gdma_extmem_reject_peri_num);
+		Serial.printf("\tgdma_extmem_reject_channel_num : 0x%x\n", this->extmem_reject_st.gdma_extmem_reject_channel_num);
+		Serial.printf("\tgdma_extmem_reject_atrr : 0x%x\n", this->extmem_reject_st.gdma_extmem_reject_atrr);
+	}
+}
+
+// Date Register
+void GdmaDebug::print_date(bool onlyCoreValues){
+	Serial.printf("=== date values ===\n");
+	Serial.printf("\tRegister Value : 0x%x\n", this->date.val);
+	if(!onlyCoreValues){
+		Serial.printf("\tReset Value : 0x%x\n", this->date.reset);
+		Serial.printf("\tOffset Value : 0x%x\n", this->date.offset);
+		Serial.printf("\tgdma_date : 0x%x\n", this->date.gdma_date);
+	}
+}
+
