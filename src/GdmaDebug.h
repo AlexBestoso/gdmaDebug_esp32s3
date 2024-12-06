@@ -1,5 +1,5 @@
-#define DBG_PERF_GDMA_BASE 0x60000000
-#define DBG_PERF_GDMA 0x3f00
+#define DBG_PERF_GDMA 0x3f000
+#define DBG_PERF_GDMA_BASE 0x60000000 + DBG_PERF_GDMA
 #define DBG_PERF_GDMA_READ(reg) (*(volatile uint32_t *)(DBG_PERF_GDMA_BASE+reg))
 #define DBG_PERF_GDMA_WRITE(reg, val) ((*(volatile uint32_t *)(DBG_PERF_GDMA_BASE+reg)) = (val))
 
@@ -7,7 +7,7 @@
 
 class GdmaDebug{
 	private:
-		void regWrite(uint32_t reg, uint32_t val);
+		void regWrite(uint32_t reg, uint32_t val, int offset);
 		uint32_t regRead(uint32_t reg, int offset);
 
 		// Helps isoltate fields within the 32 bit registers.
@@ -224,9 +224,52 @@ class GdmaDebug{
 		void printPermissionStatRegs(bool onlyCoreValues);
 		void print_extmem_reject_addr(bool onlyCoreValues);
 		void print_extmem_reject_st(bool onlyCoreValues);
-		/*
-		 * Version Register
-		 * */
+		
+		// Version Register
 		void print_date(bool onlyCoreValues);
+
+		/*
+		 * Patch Functions 
+		 * */
+		void patch(bool writeMode);
+
+		// Configuration Registers
+		void patchConfigRegs(bool writeMode);
+       		void patch_in_conf0(bool writeMode);
+		void patch_in_conf1(bool writeMode); 
+		void patch_in_pop(bool writeMode);
+		void patch_in_link(bool writeMode);
+		void patch_out_conf0(bool writeMode);
+		void patch_out_conf1(bool writeMode);
+		void patch_out_push(bool writeMode);
+		void patch_out_link(bool writeMode);
+		void patch_pd_conf(bool writeMode);
+		void patch_misc_conf(bool writeMode);
+
+		
+		// Interrupt Registers
+		void patchInterruptRegs(bool writeMode);
+		void patch_in_int_raw(bool writeMode);
+		void patch_in_int_ena(bool writeMode);
+		void patch_in_int_clr(bool writeMode);
+		void patch_out_int_raw(bool writeMode);
+		void patch_out_int_ena(bool writeMode);
+		void patch_out_int_clr(bool writeMode);
+		void patch_extmem_reject_int(bool writeMode);
+		void patch_extmem_reject_int_ena(bool writeMode);
+		void patch_extmem_reject_int_clr(bool writeMode);
+
+		// Priority Registers
+		void patchPriorityRegs(bool writeMode);
+		void patch_in_pri(bool writeMode);
+		void patch_out_pri(bool writeMode);
+
+		// Peripheral Selection Registers
+		void patchPeriphSelRegs(bool writeMode);
+		void patch_in_peri_sel(bool writeMode);
+		void patch_out_peri_sel(bool writeMode);
+
+		// Version Register
+		void patch_date(bool writeMode);
 
 };
